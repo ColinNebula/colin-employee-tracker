@@ -1,3 +1,3 @@
-DROP DATABASE IF EXISTS work;
-CREATE DATABASE work;
-USE work;
+DROP DATABASE IF EXISTS companyn;
+CREATE DATABASE companyn;
+USE companyn;

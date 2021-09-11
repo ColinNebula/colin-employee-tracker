@@ -1,7 +1,7 @@
 {
   "name": "colin-employee-tracker",
   "version": "1.0.0",
-  "description": "* [Installation](#installation)\r * [Usage](#usage)\r * [Credits](#credits)\r * [License](#license)",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -11,6 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/ColinNebula/colin-employee-tracker.git"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -21,8 +22,5 @@
     "express": "^4.17.1",
     "mysql2": "^2.3.0"
   },
-  "devDependencies": {
-    "jest": "^27.1.1"
-  },
-  "keywords": []
+  "devDependencies": {}
 }
