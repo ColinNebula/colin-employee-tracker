@@ -1,21 +1,46 @@
 INSERT INTO departments (name, description)
 VALUES
-  ('JS Juggernauts', 'The JS Juggernauts eat, breathe, and sleep JavaScript. They can build everything you could ever want in JS, including a new kitchen sink.'),
-  ('Heroes of HTML', 'Want to see a mock-up turn into an actual webpage in a matter of minutes? Well, the Heroes of HTML can get it done in a matter of seconds.'),
-  ('Git Gurus', 'Need to resolve a merge conflict? The Git Gurus have your back. Nobody knows Git like these folks do.');
+  ('finance'),
+  ('Lawyer'),
+  ('IT'),
+  ('Security'),
+  ('Engineering'),
+  ('Sales');
 
-INSERT INTO Managers (first_name, last_name, department_id)
+INSERT INTO employees (first_name, last_name, department, department_id)
 VALUES
-  ('Ronaldo', 'Firebank', 1, 1, Manager),
-  ('Virgin', 'Wulf', 1, 1, Manager),
-  ('Pire', 'Gavin', 1, 0, Manager),
-  ('Charles', 'Rilley', 2, 1, Manager),
-  ('Katherine', 'Mansfield', 2, 1, Manager),
-  ('Doho', 'Carrin', 3, 0, Manager),
-  ('Edwardo', 'Bella', 3, 0, Manager),
-  ('Monte', 'Summerstone', 3, 1, Manager),
-  ('Octava', 'Butta', 3, 1, Manager),
-  ('Unum', 'Zurin', NULL, 1, Manager);
+  ('Ronaldo', 'Firebank', 'Finance', 1, 1),
+  ('Virgin', 'Wulf', 'Sales', 1, 1),
+  ('Pire', 'Gavin', 'IT', 1, 0),
+  ('Charles', 'Rilley', 'IT', 2, 1),
+  ('Katherine', 'Mansfield', 'security', 2, 1),
+  ('Doho', 'Carrin', 'Lawyer', 3, 0),
+  ('Edwardo', 'Bella', 'Engineering', 3, 0),
+  ('Monte', 'Summerstone', 'Sales', 3, 1),
+  ('Octava', 'Butta', 'Engineering', 3, 1),
+  ('Unum', 'Zurin', 'Sales', NULL, 1),
+  ('Samuel', 'Delany', 'Engineering', 1, 3),
+  ('Tony', 'Duvert', 'Lawyer', 2, 1),
+  ('Dennis', 'Cooper', 'IT', 1, 1),
+  ('Monica', 'Bellucci', 'IT', 3, 1),
+  ('Samuel', 'Johnson', 'Security', 1, 1),
+  ('John', 'Dryden', 'IT', 2, 1),
+  ('Alexander', 'Pope', 'Security', 1, 1),
+  ('Lionel', 'Johnson', 'Sales', 3, 1),
+  ('Aubrey', 'Beardsley', 'Sales', 1, 0),
+  ('Tulsa', 'Luper', 'Finance',1, 1),
+  ('William', 'Morris', 'Finance', 1, 0),
+  ('George', 'Shaw', 'Sales', 2, 1),
+  ('Arnold', 'Bennett', 'Lawyer', 1, 1),
+  ('Algernon', 'Blackwood', 'IT', 3, 1),
+  ('Rhoda', 'Broughton', 'IT', 1, 1),
+  ('Hart', 'Crane', 'Sales', 3, 1),
+  ('Vitorio', 'DeSica', 'Security', 1, 0),
+  ('waller', 'Hector', 'Engineering', 3, 1),
+  ('Elizabeth', 'Gaskell', 'Sales', 1, 0),
+  ('George', 'Sand', 'Engineering', 3, 1),
+  ('Vernon', 'Lee', 'Lawyer', 1, 1),
+  ('Arthur', 'Machen', 'Security', NULL, 1);
 
 INSERT INTO associates (first_name, last_name, email)
 VALUES
@@ -40,4 +65,14 @@ VALUES
   ('Elizabeth', 'Gaskell', 'egaskell@pages.net'),
   ('George', 'Sand', 'gsand@pride.com'),
   ('Vernon', 'Lee', 'vlee@spooks.net'),
-  ('Arthur', 'Machen', 'amach@spirits.com')
+  ('Arthur', 'Machen', 'amach@spirits.com');
+
+
+INSERT INTO managers (first_name, last_name, title, department, salary)
+VALUES
+  ('Ben', 'Robby', 'manager', 'finance', '125.000'),
+  ('Jackson', 'Lambert', 'manager', 'it', '87.000'),
+  ('Rob', 'Bogata', 'manager', 'engineering', '90.000'),
+  ('Pablo', 'Talbert', 'manager', 'lawyer', '80.000'),
+  ('Dan', 'Anton', 'manager', 'sales', '50.000'),
+  ('Author', 'Morgan', 'manager', 'security', '60.000');
