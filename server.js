@@ -22,6 +22,23 @@ const db = mysql.createConnection(
     console.log('Connected to the companyn database.')
 );
 
+// Query
+
+// GET a single employee
+db.query(`SELECT * FROM employee WHERE id = 1`, (err, row) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log(row);
+});
+
+// Delete a employees
+db.query(`DELETE FROM employees WHERE id = ?`, 1, (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log(result);
+  });
 
 // Default response for any other request (Not Found)
 app.use((req, res) => {
