@@ -1,11 +1,11 @@
-INSERT INTO departments (name, description)
+INSERT INTO departments ( name, description)
 VALUES
-  ('finance'),
-  ('Lawyer'),
-  ('IT'),
-  ('Security'),
-  ('Engineering'),
-  ('Sales');
+  ('finance', 'Handles the finacial part of the company'),
+  ('Lawyer', 'The companys leagal team'),
+  ('IT', 'The companys IT pros'),
+  ('Security', 'Team always ready'),
+  ('Software Engineering', 'Software Engineering team'),
+  ('Sales', 'The companys sales team');
 
 INSERT INTO employees (first_name, last_name, department, industry_connected)
 VALUES
