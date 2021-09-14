@@ -1,4 +1,4 @@
-INSERT INTO departments ( name, description)
+INSERT INTO department ( name, description)
 VALUES
   ('finance', 'Handles the finacial part of the company'),
   ('Lawyer', 'The companys leagal team'),
@@ -7,48 +7,19 @@ VALUES
   ('Software Engineering', 'Software Engineering team'),
   ('Sales', 'The companys sales team');
 
-INSERT INTO employees (first_name, last_name, department, industry_connected)
+INSERT INTO role (title, salary, department_id)
+VALUES 
+('IT', 70000, 3), 
+('Lawyer', 60000, 2), 
+('Sales Associate', 10000, 6), 
+('Finance', 120000, 1), 
+('Security', 120000, 4),
+('Software Engineering', 80000, 5),
+('Intern', 20000, 6);
+
+
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES
-  ('Ronaldo', 'Firebank', 'Finance', 1),
-  ('Virgin', 'Wulf', 'Sales', 1),
-  ('Pire', 'Gavin', 'IT', 0),
-  ('Charles', 'Rilley', 'IT', 1),
-  ('Katherine', 'Mansfield', 'security', 2),
-  ('Doho', 'Carrin', 'Lawyer', 3),
-  ('Edwardo', 'Bella', 'Engineering', 0),
-  ('Monte', 'Summerstone', 'Sales', 3),
-  ('Octava', 'Butta', 'Engineering', 1),
-  ('Unum', 'Zurin', 'Sales', 1),
-  ('Samuel', 'Delany', 'Engineering', 3),
-  ('Tony', 'Duvert', 'Lawyer', 2),
-  ('Dennis', 'Cooper', 'IT', 1),
-  ('Monica', 'Bellucci', 'IT', 3),
-  ('Samuel', 'Johnson', 'Security', 1),
-  ('John', 'Dryden', 'IT', 2),
-  ('Alexander', 'Pope', 'Security',  1),
-  ('Lionel', 'Johnson', 'Sales', 3),
-  ('Aubrey', 'Beardsley', 'Sales', 0),
-  ('Tulsa', 'Luper', 'Finance', 1),
-  ('William', 'Morris', 'Finance', 0),
-  ('George', 'Shaw', 'Sales', 1),
-  ('Arnold', 'Bennett', 'Lawyer', 1),
-  ('Algernon', 'Blackwood', 'IT', 3),
-  ('Rhoda', 'Broughton', 'IT', 1),
-  ('Hart', 'Crane', 'Sales', 3),
-  ('Vitorio', 'DeSica', 'Security', 0),
-  ('waller', 'Hector', 'Engineering', 3),
-  ('Elizabeth', 'Gaskell', 'Sales', 1),
-  ('George', 'Sand', 'Engineering', 3),
-  ('Vernon', 'Lee', 'Lawyer', 1),
-  ('Arthur', 'Machen', 'Security', 2);
+  ('Ronaldo', 'Firebank', 4, NULL);
+  
 
-
-
-INSERT INTO managers (first_name, last_name, title, department, salary)
-VALUES
-  ('Ben', 'Robby', 'manager', 'finance', '125.000'),
-  ('Jackson', 'Lambert', 'manager', 'it', '87.000'),
-  ('Rob', 'Bogata', 'manager', 'engineering', '90.000'),
-  ('Pablo', 'Talbert', 'manager', 'lawyer', '80.000'),
-  ('Dan', 'Anton', 'manager', 'sales', '50.000'),
-  ('Author', 'Morgan', 'manager', 'security', '60.000');
