@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db/connection');
+const inputCheck = require('../../utils/inputCheck');
 
-// Route for the departments
-router.get('/departments', (req, res) => {
-    const sql = `SELECT * FROM departments`;
+// GET department 
+router.get('/department', (req, res) => {
+  const sql = `SELECT * FROM department ORDER BY name`;
+  
     db.query(sql, (err, rows) => {
       if (err) {
         res.status(500).json({ error: err.message });
@@ -12,48 +14,97 @@ router.get('/departments', (req, res) => {
       }
       res.json({
         message: 'success',
-        data: rows
+        data: rows,
       });
     });
-});  
+  });
 
-// Route for a single department
+  // Get single department
 router.get('/department/:id', (req, res) => {
-    const sql = `SELECT * FROM departments WHERE id = ?`;
-    const params = [req.params.id];
-    db.query(sql, params, (err, row) => {
-      if (err) {
-        res.status(400).json({ error: err.message });
-        return;
-      }
+  const sql = `SELECT * FROM department WHERE id = ?`;
+  const params = [req.params.id];
+
+  db.query(sql, params, (err, row) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: 'success',
+      data: row
+    });
+  });
+});
+
+router.post('/department', ({ body }, res) => {
+  // Data validation
+const errors = inputCheck(body, 'name');
+if (errors) {
+  res.status(400).json({ error: errors });
+  return;
+}
+  const sql = `INSERT INTO department (name) VALUES (?)`;
+  const params = [body.name];
+
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: 'success',
+      data: body
+    });
+  });
+});
+
+router.put('/department/:id', (req, res) => {
+  // Data validation
+  const errors = inputCheck(req.body, 'name');
+  if (errors) {
+    res.status(400).json({ error: errors });
+    return;
+  }
+
+  const sql = `UPDATE department SET name = ? WHERE id = ?`;
+  const params = [req.body.name, req.params.id];
+
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+    } else if (!result.affectedRows) {
+      res.json({
+        message: 'department was not found'
+      });
+    } else {
       res.json({
         message: 'success',
-        data: row
+        data: req.body,
+        changes: result.affectedRows
       });
-    });
+    }
   });
+});
 
-// Route for delete
+// Delete Department
 router.delete('/department/:id', (req, res) => {
-    const sql = `DELETE FROM departments WHERE id = ?`;
-    const params = [req.params.id];
-    db.query(sql, params, (err, result) => {
-      if (err) {
-        res.status(400).json({ error: res.message });
-        // checks if anything was deleted
-      } else if (!result.affectedRows) {
-        res.json({
-          message: 'Department not found'
-        });
-      } else {
-        res.json({
-          message: 'deleted',
-          changes: result.affectedRows,
-          id: req.params.id
-        });
-      }
-    });
-  });
+  const sql = `DELETE FROM department WHERE id = ?`;
 
-// Export routes
-module.exports = router;
+  db.query(sql, req.params.id, (err, result) => {
+    if (err) {
+      res.status(400).json({ error: res.message });
+    } else if (!result.affectedRows) {
+      res.json({
+        message: 'Department was not found'
+      });
+    } else {
+      res.json({
+        message: 'deleted',
+        changes: result.affectedRows,
+        id: req.params.id
+      });
+    }
+  });
+});
+
+  module.exports = router;

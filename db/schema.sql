@@ -6,8 +6,7 @@ DROP TABLE IF EXISTS role;
 
 CREATE TABLE department (
   id INTEGER AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(50) NOT NULL,
-  description TEXT
+  name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE role (
@@ -22,6 +21,8 @@ CREATE TABLE employee (
   first_name VARCHAR(30) NOT NULL,
   last_name VARCHAR(30) NOT NULL,
   manager_id INTEGER,
-  role_id INTEGER
+  role_id INTEGER,
+  manager_id BOOLEAN NOT NULL,
+  CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE SET NULL,
 );
 

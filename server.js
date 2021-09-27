@@ -1,7 +1,10 @@
 const express = require('express');
+// Importing connection
 const db = require('./db/connection');
+// Add api routes
 const apiRoutes = require('./routes/apiRoutes');
-// Port Used
+
+// Ports Used
 const PORT = process.env.PORT || 3001;
 const app = express();
 
@@ -19,11 +22,9 @@ app.use((req, res) => {
 
 // Start server after DB connection
 db.connect(err => {
-  if (err) throw err;
-  console.log('Database connected.');
-  // This is the function that will start the Express.js server on port 3001
-  app.listen(PORT, () => {
-  
-  console.log(`Server running on port ${PORT}`);
-});
-});
+    if (err) throw err;
+    console.log('Database connected.');
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  });
