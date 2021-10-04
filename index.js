@@ -43,6 +43,7 @@ const viewAllEmployeesByName = () => {
         menu();
     });
 };
+
 // Add Employee
 addAnEmployee = () => {
     prompt([
@@ -106,6 +107,31 @@ addAnEmployee = () => {
     });
 };
 
+// View all roles 
+const viewAllRoles = () => {
+    let sql = `SELECT role.id, role.title, department.name AS department 
+    FROM role
+    INNER JOIN department ON role.department_id = department.id`;
+    connection.query(sql, (err, res) => {
+        if (err) throw error;
+        console.log(
+        '====================================================================================='
+        );   
+    
+    console.log(`${chalk.blueBright('List of the Roles:\n')}`);
+    res.forEach((role) => {
+        console.log(role.title);
+    });
+    console.log(
+
+        '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+    );
+    menu();
+})
+
+};
+
+// View all the departments
 const viewAllDepartments = () => {
     let sql = `SELECT department.id AS id, department.name AS department FROM department`;
     connection.query(sql, (err, res) => {
@@ -118,10 +144,11 @@ const viewAllDepartments = () => {
 
         console.log('==================================================================='
         );
-        // menu()
+        menu()
     });
 };
 
+// Add a new role
 const addRole = () => {
     const sql = 'SELECT * FROM department';
     connection.query(sql, (err, res) => {
@@ -205,9 +232,10 @@ const addDepartment = () => {
         });
     });
 };
-
+// Update the employee role
 const updateEmployeeRole = () => {
-    let employeesArray = []
+    
+    let employeeArray = []
 
     connection.query(`SELECT first_name, last_name FROM employee`,
         (err, res) => {
@@ -219,7 +247,7 @@ const updateEmployeeRole = () => {
                     message: 'Select the employee with new role',
                     choices() {
                         res.forEach(employee => {
-                            employeesArray.push(`${employee.name} ${employee.last_name}`);
+                            employeeArray.push(`${employee.name} ${employee.last_name}`);
                         });
                         return employeeArray;
                     }
@@ -228,7 +256,7 @@ const updateEmployeeRole = () => {
                     type: 'input',
                     name: 'role',
                     message: `Please enter the new role id.${chalk.blueBright('\nManager: 1\nEngineer: 2\nIntern: 3\nSales: 4\nlawyer: 5\nSecurity: 6\nSoftware Engineer: 7\n' +
-                        chalk.yellow('Answer Here: '))}`
+                    chalk.yellow('Answer Here: '))}`
                 }
             ]).then((answers) => {
                 const updateEmployeeRole = answers.employee.split(' ');
@@ -237,9 +265,9 @@ const updateEmployeeRole = () => {
 
                 connection.query(
                     `UPDATE employee
-        SET role_id = ${answers.role}
-        WHERE first_name = ${updateEmployeeRoleFirstName}
-        AND last_name = ${updateEmployeeRoleLastName}`,
+                    SET role_id = ${answers.role}
+                    WHERE first_name = ${updateEmployeeRoleFirstName}
+                    AND last_name = ${updateEmployeeRoleLastName}`,
 
                     (err, res) => {
                         if (err) throw err;
@@ -248,12 +276,14 @@ const updateEmployeeRole = () => {
 
                         );
                         console.log('Employee Role Updated!');
-                        viewAllEmployees();
+                        viewAllEmployee();
 
                     })
             });
         });
 };
+
+// Inquirer prompt
 prompt([
         {
             type: 'list',
@@ -272,7 +302,7 @@ prompt([
                 return console.log('Load the application again to begin!');
         }
     });
-
+// Main Menu
 function menu() {
     prompt([
         {
@@ -283,12 +313,11 @@ function menu() {
             )}`,
             choices: [
                 'View All Employee',
-                'Delete an Employee by name',
                 'Add an Employee',
                 'View All Roles',
                 'Add a role',
                 'Add a department',
-                'Update an employee role',
+                'Update employee role',
                 'Exit',
             ],
         },
@@ -297,9 +326,7 @@ function menu() {
         if (choices === 'View All Employee') {
             viewAllEmployee();
         }
-        if (choices === 'Delete an Employee by name') {
-            deleteEmployeeByName();
-        }
+    
         if (choices === 'Add an Employee') {
             addAnEmployee();
         }
@@ -307,13 +334,13 @@ function menu() {
             viewAllRoles();
         }
         
-        if (choices === 'Add a role') {
+        if (choices === 'Add a Role') {
             addRole();
         }
-        if (choices === 'Add a department') {
+        if (choices === 'Add a Department') {
             addDepartment();
         }
-        if (choices === 'Update an employee role') {
+        if (choices === 'Update Employee Role') {
             updateEmployeeRole();
         }
         if (choices === 'Exit') {
