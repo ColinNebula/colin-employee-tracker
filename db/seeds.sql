@@ -22,10 +22,10 @@ INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES
   ('Ronaldo', 'Firebank', 4, NULL),
   ('Virginia', 'Woolf', 1, 2),
-  ('Piers', 'Gaveston', 0, 1),
+  ('Piers', 'Gaveston', 2, 1),
   ('Charles', 'LeRoi', 1, 3),
   ('Katherine', 'Mansfield', 1, 1),
-  ('Dora', 'Carrington', 0, 4),
-  ('Edward', 'Bellamy', 0, 2);
+  ('Dora', 'Carrington', 2, 4),
+  ('Edward', 'Bellamy', 2, 2);
   
 
