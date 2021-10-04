@@ -2,6 +2,7 @@
 
 
 ## Description
+Employee Tracker is an application built using backend tools like MYSQL database, npm libraries such as inquirer, sequelize, and dotenv. This application also features front end tools, languages and libraries such as Javascript, CSS, and HTML to bring the application to life. 
 
 
 # Table of Contents
@@ -17,6 +18,7 @@ SO THAT I can organize and plan my business
 ## Project URl
 
 ## Github Repository link
+https://github.com/ColinNebula/colin-employee-tracker/tree/main
 
 ## Project Mock-Up
 
@@ -25,10 +27,10 @@ SO THAT I can organize and plan my business
 
 
 ## Installation
-
-
-## Usage
-N/A
+Download or clone the repository
+Run npm install to install npm libraries
+Type "npm start" to start the server
+Type "node index.js" to run the application
 
 ## Credits
 Colin Nebula

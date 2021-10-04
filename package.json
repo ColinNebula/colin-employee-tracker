@@ -2,10 +2,10 @@
   "name": "colin-employee-tracker",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
     "inquirer": "^8.1.2",
     "moment": "^2.29.1",
     "mysql2": "^2.3.0",
+    "nodemon": "^2.0.13",
     "sequelize": "^6.6.5"
   },
   "devDependencies": {
