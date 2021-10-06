@@ -27,10 +27,10 @@ https://github.com/ColinNebula/colin-employee-tracker/tree/main
 
 
 ## Installation
-Download or clone the repository
-Run npm install to install npm libraries
-Type "npm start" to start the server
-Type "node index.js" to run the application
+* Download or clone the repository
+* Run npm install to install npm libraries
+* Type "npm start" to start the server
+* Type "node index.js" to run the application
 
 ## Credits
 Colin Nebula

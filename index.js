@@ -8,6 +8,8 @@ prompt = inquirer.createPromptModule();
 connection.connect((err) => {
     if (err) throw err;
 });
+
+// View All employees
 const viewAllEmployee = () => {
     let sql = `SELECT employee.id, employee.first_name, employee.last_name,
 role.title,
@@ -33,7 +35,7 @@ const viewAllEmployeesByName = () => {
     let sql = `SELECT employee.id, employee.first_name, employee.last_name,`;
     connection.query(sql, (err, res) => {
         if (err) throw err;
-        console.log(`${Chalk.greenBright('View Employees by name:\n')}`);
+        console.log(`${chalk.greenBright('View Employees by name:\n')}`);
         res.forEach((role) => {
             console.log(role.title);
         });
@@ -78,7 +80,7 @@ addAnEmployee = () => {
                 connection.query(managerSql, (err, data) => {
                     if (err) throw err;
                     const managers = data.map(({ id, first_name, last_name }) => ({
-                        name: first_name + "" + last_name, value: id,
+                        name: first_name + " " + last_name, value: id,
                     }));
                     prompt([
                         {
@@ -124,7 +126,7 @@ const viewAllRoles = () => {
     });
     console.log(
 
-        '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+        '====================================================================================='
     );
     menu();
 })
@@ -139,12 +141,78 @@ const viewAllDepartments = () => {
         console.log('===================================================================='
         );
 
-        console.log(`${chalk.greenBright('View The Departments:\n')}`);
+        console.log(`${chalk.blueBright('View The Departments:\n')}`);
         console.log(res);
 
         console.log('==================================================================='
         );
         menu()
+    });
+};
+
+// Add an employee 
+const addEmployee = () => {
+    prompt([
+        {
+            type: 'input',
+            name: 'firstName',
+            message: 'Employer first name?',
+        },
+        {
+            type: 'input',
+            name: 'lastName',
+            message: 'Employer last name?',
+        },
+    ]).then((answer) => {
+        const crit = [answer.firstName, answer.lastName];
+        const roleSql = `SELECT role.id, role.title FROM role`;
+        connection.query(roleSql, (err, data) => {
+            if (err) throw err;
+            
+            const roles = data.map(({ id, title }) + ({ name: title, value: id }));
+            prompt([
+                {
+                    type: 'list',
+                    name: 'role',
+                    message: 'Employer Role?',
+                    choices: roles,
+                },
+            ]).then((roleChoice) => {
+                const role = roleChoice.role;
+                crit.push(role);
+                const managerSql = `SELECT * FROM employee`;
+                connection.query(managerSql, (err, data) => {
+                    if (err) throw err;
+
+                    const managers = data.map(({ id, first_name, last_name }) => ({ 
+                        name: first_name + " " + last_name,
+                        value: id,
+                    }));
+                    
+                    prompt([
+                        {
+                        type:'list',
+                        name: 'manager',
+                        message: 'Who is the employee manager?',
+                        choices: managers,
+                        },
+                    ]).then ((managerChoice) => {
+                        const manager = managerChoice.manager;
+                        crit.push(manager);
+                        const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
+                            VALUES (?, ?, ?, ?)`;
+
+                        connection.query(sql, crit, (err) => {
+                            console.log(
+                                '=================================================================================='
+                            );
+                            console.log('Employer was added properly');
+                            viewAllEmployee();
+                        });
+                    });
+                }); 
+            });
+        });
     });
 };
 
@@ -232,6 +300,7 @@ const addDepartment = () => {
         });
     });
 };
+
 // Update the employee role
 const updateEmployeeRole = () => {
     
@@ -288,7 +357,7 @@ prompt([
         {
             type: 'list',
             message: `${chalk.white.bgBlue(
-                "Welcome to Employee Tracker. click on continue to advance or Exit."
+                "Welcome to Employee Tracker! "
             )}`,
             choices: ['Continue', 'Exit'],
             name: 'start',
@@ -309,13 +378,15 @@ function menu() {
             type: 'list',
             name: 'choices',
             message: `${chalk.white.bgBlue(
-                "Which task would you like to start with? (Required)."
+                "What task would you like to do? (Required)."
             )}`,
             choices: [
                 'View All Employee',
                 'Add an Employee',
                 'View All Roles',
                 'Add a role',
+                'Add employee',
+                'View All Department',
                 'Add a department',
                 'Update employee role',
                 'Exit',
@@ -328,7 +399,7 @@ function menu() {
         }
     
         if (choices === 'Add an Employee') {
-            addAnEmployee();
+           addEmployee();
         }
         if (choices === 'View All Roles') {
             viewAllRoles();
@@ -336,6 +407,12 @@ function menu() {
         
         if (choices === 'Add a Role') {
             addRole();
+        }
+        if (choices === 'Add employee') {
+            addRole();
+        }
+        if (choices === 'View All Departments') {
+            viewAllDepartments();
         }
         if (choices === 'Add a Department') {
             addDepartment();
