@@ -11,20 +11,21 @@ Employee Tracker is an application built using backend tools like MYSQL database
 * [Credits](#credits)
 * [License](#license)
 
+## User Story
 AS A business owner
 I WANT to be able to view and manage the departments, roles, and employees in my company
 SO THAT I can organize and plan my business
 
 ## Project URl
-
+https://drive.google.com/file/d/1uFQlzSGs4cJKClo6FzoJ7LOvLEyiueNd/view?usp=sharing
 ## Github Repository link
 https://github.com/ColinNebula/colin-employee-tracker/tree/main
 
 ## Project Mock-Up
-
+![12-sql-homework-demo-01](https://user-images.githubusercontent.com/57843842/136423125-55b77983-ab3b-466c-85cb-98fb3f47b858.gif)
 
 ## Project Screenshot
-
+![Project_screenshot](https://user-images.githubusercontent.com/57843842/136423644-8e17aa82-1825-49fe-8ca5-b6bfbb327d05.jpg)
 
 ## Installation
 * Download or clone the repository
